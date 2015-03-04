@@ -5,13 +5,13 @@ public class Main {
 	private static final String XML_TASK_FILE_PATH = "init_task.xml"; 
 	
 	public static void main(String[] args){
-		Parser mParser = new Parser();
+		Storage mParser = new Storage();
 		
 		
-		HashMap<Integer, Task> mTaskTable= new HashMap<Integer, Task>();
-		mTaskTable = mParser.XmltoTable(XML_TASK_FILE_PATH);
+		ArrayList<Task> mArrayTask= new ArrayList<Task>();
+		mArrayTask = mParser.XmltoTable(XML_TASK_FILE_PATH);
 		
-		System.out.println("mTaskTable.size()  " + mTaskTable.size());
+		System.out.println("mTaskTable.size()  " + mArrayTask.size());
 		
 				
 		//Task task = new Task();
@@ -22,30 +22,27 @@ public class Main {
 		//Task task2 = new Task();
 		//task2.setID(1001);
 		//System.out.println(mParser.XmlAddTask(XML_TASK_FILE_PATH, task2));
-		
-		mTaskTable = dummyTable(1000);
-		System.out.println(mParser.tableToXml(XML_TASK_FILE_PATH, mTaskTable));
+		mParser.setMaxNumberOfTasks(1000);
+		mArrayTask = dummyTable(1000);
+		System.out.println(mParser.tableToXml(XML_TASK_FILE_PATH, mArrayTask));
 		
 	}
 	
-	private static HashMap<Integer, Task> dummyTable(int maxCount){
-		HashMap<Integer, Task> mTable = new HashMap<Integer, Task>();
+	private static ArrayList<Task> dummyTable(int maxCount){
+		ArrayList<Task> mArray = new ArrayList<Task>();
 		
+
 		for(int i=0; i< maxCount; i++){
-			Task t = new Task(i,
-					"Title " + i, 
-					"1424232000000",
-					"1424203200000",
-					"12:00",
-					"18/02/15",
-					"16:00",
-					"18/02/15",
+			Task t = new Task(i + 1,
+					"Title " + (i + 1), 
+					1424232000000L,
+					1424203200000L,
 					false);
 			
-			mTable.put(i, t);
+			mArray.add(t);
 		}
 		
-		return mTable;
+		return mArray;
 		
 	}
 }
